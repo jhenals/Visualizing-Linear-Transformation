@@ -1,0 +1,172 @@
+import numpy as np
+from turtle import *
+
+'''Questo programma calcola e disegna con il modulo
+ Turtle la Trasformazione Lineare del piano bidimensionale'''
+
+#vettore
+print('**coordinate con valore tra (-5,5)')
+print()
+      
+vettore = list()
+vx,vy = input("Inserisci le coordinate del vettore prefissato(separate dalla virgola): ").split(',')
+vettore.append(int(vx))
+vettore.append(int(vy))
+
+
+#matrice associata
+vettore_i_tras = list()
+mxi,myi = input("Inserisci le coordinate del vettore i trasformato(separate dalla virgola): ").split(',')
+vettore_i_tras.append(int(mxi))
+vettore_i_tras.append(int(myi))
+
+vettore_j_tras = list()
+mxj,myj = input("Inserisci le coordinate del vettore j trasformato(separate dalla virgola): ").split(',')
+vettore_j_tras.append(int(mxj))
+vettore_j_tras.append(int(myj))
+
+matrice= [vettore_i_tras,
+          vettore_j_tras]
+
+
+colormode(255)
+
+def bluelines():
+    speed(0)
+    color(0,255,255) #cyan
+    for i in range (15): #linee verticali
+        pu()
+        goto(-7+i,-7)
+        pd()
+        goto(-7+i,7)
+        pu()
+        
+    for j in range (15): #linee orizzontali
+        pu()
+        goto (-7, -7+j)
+        pd()
+        goto (7, -7+j)
+        pu()
+        
+def setup():
+    speed(0)
+    setworldcoordinates(-7,-7,7,7)
+    setpos(0,0)
+    clear()  
+    bluelines()
+    setpos(0,0)
+    setheading(0) #east
+
+    ''' disegna the x-y grid'''
+    pd()
+    color ('black')
+    for i in range (4):
+        setpos (0,0)
+        fd(7)
+        rt(90)
+    pu()
+
+    '''bases/ original vectors : j-hat and i-hat'''   
+    setpos(0,0)
+    lt(90)
+    pd()
+    color('red')
+    fd(1) #i-hat
+    stamp()
+    pu()
+    setpos(0,0)
+
+    rt(90)
+    pd()
+    color('green')
+    fd(1) #j-hat
+    stamp()
+    pu()
+    
+
+def plot_points(data,x,y):
+    pu()
+    setpos(0,0)
+    x_axis= int(x)
+    y_axis= int(y)
+    pd()
+    goto(x_axis, y_axis)
+    shape('circle')
+    shapesize(0.5,0.5)
+    stamp()
+    pu()
+    setpos(0,0)
+
+def turtle_writes(coord):
+    style= ('Courier', 11, 'italic')
+    write( coord, font=style)
+    hideturtle()
+
+
+def main():
+
+    print("vettore prefissato:" ,vettore)
+    print("matrice 2x2:")
+    print(matrice)
+    
+    setup()
+    
+    #vettore
+    color('yellow')
+    plot_points(vettore,vettore[0],vettore[1])
+    
+    penup()
+    home()
+    goto(vettore[0],vettore[1])
+    turtle_writes(vettore )
+
+    
+    #transformed i hat
+    color('green')
+    pensize(4)
+    plot_points(matrice,matrice[0][0],matrice[0][1])
+
+    penup()
+    home()
+    goto([matrice[0][0],matrice[0][1]])
+    turtle_writes(matrice[0])
+    
+    #transformed j hat
+    color('red')
+    pensize(4)
+    plot_points(matrice,matrice[1][0],matrice[1][1])
+    
+    penup()
+    home()
+    goto([matrice[1][0],matrice[1][1]])
+    turtle_writes(matrice[1])
+    
+    #trasformazione_lineare
+    vect= np.array([vettore])
+    vectT=np.transpose(vect)
+
+    matr= np.matrix([matrice[0], matrice[1]])
+    matT= np.transpose(matr)
+    
+    ret= np.dot(matT,vectT)
+    print("vettore trasformato: ")
+    print (ret)
+
+    #plot the transformation
+    color('yellow')
+    plot_points(ret,ret[0],ret[1])
+    
+    penup()
+    home()
+    goto(int(ret[0]),int(ret[1]))
+    turtle_writes(ret )
+
+
+main()
+                
+
+
+  
+    
+
+
