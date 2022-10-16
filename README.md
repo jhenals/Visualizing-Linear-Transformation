@@ -9,7 +9,7 @@ This simple application resolves the Linear Transformation of a vector and demon
 
 In this application, user will provide the coordinate values of the vector (preferably between (-5,5) and the 2x2 matrix. The value of the Linear transformation will be calculated using Numpy while the position of the result will be drawn using Turtle.
 
-##Tecnologies used
+## Tecnologies used
 * Python
 * Numpy
 * Turtle
