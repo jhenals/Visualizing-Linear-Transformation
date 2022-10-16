@@ -1,8 +1,7 @@
 import numpy as np
 from turtle import *
 
-'''Questo programma calcola e disegna con il modulo
- Turtle la Trasformazione Lineare del piano bidimensionale'''
+'''Questo programma calcola e disegna con il Turtle di Python la Trasformazione Lineare di un vettore in un piano bidimensionale'''
 
 #vettore
 print('**coordinate con valore tra (-5,5)')
